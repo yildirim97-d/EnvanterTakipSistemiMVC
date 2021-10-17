@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @*<meta charset="utf-8" />*@
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Day Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/Scripts/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="~/Scripts/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Scripts/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/Scripts/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Scripts/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="~/Scripts/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Scripts/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Day - v4.4.0
+    * Template URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET Uygulamam</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+    <!-- ======= Top Bar ======= -->
+    <section id="topbar" class="d-flex align-items-center">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+                <i class="bi bi-envelope-fill"></i><a href="baris.ilgaz@ilbak.com.tr">info@example.com</a>
+                <i class="bi bi-phone-fill phone-icon"></i> +90 212 708 22 00
+            </div>
+            <div class="social-links d-none d-md-block">
+                <a href="https://twitter.com/?status=%20%20https://www.ilbak.com.tr/" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/ilbak-holding" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <h1 class="logo"><a href="https://www.ilbak.com.tr/">İLBAK HOLDİNG</a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    @*<li>@Html.ActionLink("Ana Sayfa", "Index", "Home")</li>*@
+                    <li>@Html.ActionLink("Cihaz", "Index", "cihaz")</li>
+                    <li>@Html.ActionLink("Kullanıcı", "Index", "kullanici")</li>
+                    <li>@Html.ActionLink("Zimmetle", "Index", "zimmet")</li>
+                    <li>@Html.ActionLink("Admin", "Index", "admin")</li>
+                    <li>@Html.ActionLink("Çıkış Yap", "Logout", "Security")</li>
+                    @*<li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="#about">About</a></li>
+        <li><a class="nav-link scrollto" href="#services">Services</a></li>
+        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
+        <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
+        <li><a class="nav-link scrollto" href="#team">Team</a></li>
+        <li class="dropdown">
+            <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><a href="#">Drop Down 1</a></li>
+                <li class="dropdown">
+                    <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                        <li><a href="#">Deep Drop Down 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Drop Down 2</a></li>
+                <li><a href="#">Drop Down 3</a></li>
+                <li><a href="#">Drop Down 4</a></li>
+            </ul>
+        </li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>*@
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
+            <h1>Welcome to Day</h1>
+            <h2>We are team of talented designers making websites with Bootstrap</h2>
+            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        </div>
+    </section><!-- End Hero -->
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Envanter Takip</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "KullaniciEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>KullaniciEkle</h2>
+
+<form class="form-group" method="post"> 
+
+    <div>
+        <label>Kullanici Ad </label>
+        <input type="text" class="form-control" name="kullanici_adi" required="" />
+    </div>
+
+    <div>
+        <label>Kullanici Sifre</label>
+        <input type="text"  class="form-control" name="kullanici_sifre" required=""/>
+    </div>
+
+    <div>
+        <label>Kullanici Departman</label>
+        <input  type="text" class="form-control" name="kullanici_departman" required=""/>
+    </div>
+    <br />
+    <div style="margin-top:20px">
+    <button class="btn btn-info">Kullanici Ekle</button>
+    </div>
+
+</form>

@@ -1,0 +1,24 @@
+﻿@using sirket.Models.Entity;
+@model List<tel_marka>
+@{
+    ViewBag.Title = "TelMarkaEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+<h2>MarkaKategoriEkle</h2>
+
+<form class="form-group" method="post">
+
+  
+
+    <div>
+        <label>Marka Ad </label>
+        <input type="text" class="form-control" name="telmarka_adi" required="" />
+    </div>
+
+
+    
+    <button href="~/TelMarka/Index" class="btn btn-info">Kategori Ekle</button>
+</form>

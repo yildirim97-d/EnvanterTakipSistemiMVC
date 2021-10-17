@@ -1,0 +1,111 @@
+﻿@using sirket.Models.Entity;
+@model cihaz
+    
+@{
+   
+    ViewBag.Title = "Guncelle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2> Cihaz Guncelle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @*<h4>cihaz</h4>*@
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.cihaz_id)
+
+    <label>Cihaz Ad</label>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.cihaz_ad, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cihaz_ad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cihaz_ad, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="sel1">Cihaz Tür:</label>
+        <select class="form-control" id="sel1" name="cihaz_tür">
+            @*<option value="Seçiniz">Seçiniz</option>*@
+            <option value="Laptop">Laptop</option>
+            <option value="Masaüstü">Masaüstü</option>
+
+        </select>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.cihaz_tür, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cihaz_tür, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cihaz_tür, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <label>Cihaz Marka</label>
+
+
+    @Html.DropDownListFor(model => model.marka_id, (IEnumerable<SelectListItem>)ViewBag.Marka_Kategori, new { @class = "form-control" })
+
+    <br />
+    <label>Cihaz Konum</label>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.cihaz_konum, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cihaz_konum, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cihaz_konum, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="sel1">Cihaz Durum:</label>
+        <select class="form-control" id="sel2" name="cihaz_durum">
+            <option value="Aktif">Aktif</option>
+            <option value="Pasif">Pasif</option>
+
+        </select>
+    </div>
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.cihaz_durum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.cihaz_durum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cihaz_durum, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <label>Cihaz Kayıt Tarih</label>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.cihaz_zimmet_tarih, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cihaz_zimmet_tarih, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cihaz_zimmet_tarih, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.kullanici_id, "kullanici_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("kullanici_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.kullanici_id, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+@*<button href="~/cihaz/Index" class="btn btn-info">Güncelle</button>*@
+
+    @Html.ActionLink("Back to List", "Index")
+

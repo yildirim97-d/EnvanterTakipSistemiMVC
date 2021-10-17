@@ -1,0 +1,53 @@
+﻿@using sirket.Models.Entity;
+@model List<marka_kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Marka Kategori Index</h2>
+<table id="tbl8" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Marka kategori Id</th>
+            <th>Marka Kategori Ad</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var kt in Model)
+        {
+
+            <tr>
+
+
+                <td>@kt.marka_id</td>
+                <td>@kt.marka_ad</td>
+
+                <td><a href="/MarkaKategori/Delete/@kt.marka_id" class="button blue_alt">SİL</a></td>
+                <td><a href="/MarkaKategori/Edit/@kt.marka_id" class="button black">GÜNCELLE</a></td>
+
+
+
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
+<a href="/MarkaKategori/MarkaKategoriEkle/" class="button grey"> YENİ KATEGORİ EKLE </a>
+<br />
+@*<button href="~/cihaz/Index" class="btn btn-info">Cihaz Index</button>*@
+<link href="~/Scripts/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+<script>
+    $('#tbl8').dataTable({});
+</script>
+

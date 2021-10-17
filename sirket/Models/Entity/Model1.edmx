@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sirketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="admin_ad" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="admin_sifre" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="cihaz">
+          <Key>
+            <PropertyRef Name="cihaz_id" />
+          </Key>
+          <Property Name="cihaz_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cihaz_ad" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cihaz_tür" Type="varchar" MaxLength="15" />
+          <Property Name="cihaz_konum" Type="varchar" MaxLength="15" />
+          <Property Name="cihaz_durum" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cihaz_zimmet_tarih" Type="datetime" Nullable="false" />
+          <Property Name="marka_id" Type="int" />
+        </EntityType>
+        <EntityType Name="kullanici">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici_adi" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="kullanici_sifre" Type="varchar" MaxLength="8" />
+          <Property Name="kullanici_departman" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="marka_kategori">
+          <Key>
+            <PropertyRef Name="marka_id" />
+          </Key>
+          <Property Name="marka_ad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="marka_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tel_marka">
+          <Key>
+            <PropertyRef Name="telmarka_id" />
+          </Key>
+          <Property Name="telmarka_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="telmarka_adi" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="zimmet">
+          <Key>
+            <PropertyRef Name="zimmet_id" />
+          </Key>
+          <Property Name="cihaz_id" Type="int" Nullable="false" />
+          <Property Name="kullanici_id" Type="int" Nullable="false" />
+          <Property Name="zimmet_tarih" Type="datetime" Nullable="false" />
+          <Property Name="zimmet_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="telmarka_id" Type="int" />
+        </EntityType>
+        <Association Name="FK_cihaz_marka_kategori">
+          <End Role="marka_kategori" Type="Self.marka_kategori" Multiplicity="0..1" />
+          <End Role="cihaz" Type="Self.cihaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marka_kategori">
+              <PropertyRef Name="marka_id" />
+            </Principal>
+            <Dependent Role="cihaz">
+              <PropertyRef Name="marka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zimmet_cihaz">
+          <End Role="cihaz" Type="Self.cihaz" Multiplicity="1" />
+          <End Role="zimmet" Type="Self.zimmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cihaz">
+              <PropertyRef Name="cihaz_id" />
+            </Principal>
+            <Dependent Role="zimmet">
+              <PropertyRef Name="cihaz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zimmet_kullanici">
+          <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+          <End Role="zimmet" Type="Self.zimmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kullanici">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="zimmet">
+              <PropertyRef Name="kullanici_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zimmet_tel_marka">
+          <End Role="tel_marka" Type="Self.tel_marka" Multiplicity="0..1" />
+          <End Role="zimmet" Type="Self.zimmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tel_marka">
+              <PropertyRef Name="telmarka_id" />
+            </Principal>
+            <Dependent Role="zimmet">
+              <PropertyRef Name="telmarka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sirketModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cihaz" EntityType="Self.cihaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kullanici" EntityType="Self.kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="marka_kategori" EntityType="Self.marka_kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tel_marka" EntityType="Self.tel_marka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zimmet" EntityType="Self.zimmet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_cihaz_marka_kategori" Association="Self.FK_cihaz_marka_kategori">
+            <End Role="marka_kategori" EntitySet="marka_kategori" />
+            <End Role="cihaz" EntitySet="cihaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zimmet_cihaz" Association="Self.FK_zimmet_cihaz">
+            <End Role="cihaz" EntitySet="cihaz" />
+            <End Role="zimmet" EntitySet="zimmet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zimmet_kullanici" Association="Self.FK_zimmet_kullanici">
+            <End Role="kullanici" EntitySet="kullanici" />
+            <End Role="zimmet" EntitySet="zimmet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zimmet_tel_marka" Association="Self.FK_zimmet_tel_marka">
+            <End Role="tel_marka" EntitySet="tel_marka" />
+            <End Role="zimmet" EntitySet="zimmet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sirketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admin_ad" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="admin_sifre" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="cihaz">
+          <Key>
+            <PropertyRef Name="cihaz_id" />
+          </Key>
+          <Property Name="cihaz_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cihaz_ad" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cihaz_tür" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cihaz_konum" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="cihaz_durum" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cihaz_zimmet_tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="marka_id" Type="Int32" />
+          <NavigationProperty Name="marka_kategori" Relationship="Self.FK_cihaz_marka_kategori" FromRole="cihaz" ToRole="marka_kategori" />
+          <NavigationProperty Name="zimmet" Relationship="Self.FK_zimmet_cihaz" FromRole="cihaz" ToRole="zimmet" />
+        </EntityType>
+        <EntityType Name="kullanici">
+          <Key>
+            <PropertyRef Name="kullanici_id" />
+          </Key>
+          <Property Name="kullanici_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici_adi" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kullanici_sifre" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="kullanici_departman" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="zimmet" Relationship="Self.FK_zimmet_kullanici" FromRole="kullanici" ToRole="zimmet" />
+        </EntityType>
+        <EntityType Name="marka_kategori">
+          <Key>
+            <PropertyRef Name="marka_id" />
+          </Key>
+          <Property Name="marka_ad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="marka_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="cihaz" Relationship="Self.FK_cihaz_marka_kategori" FromRole="marka_kategori" ToRole="cihaz" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tel_marka">
+          <Key>
+            <PropertyRef Name="telmarka_id" />
+          </Key>
+          <Property Name="telmarka_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="telmarka_adi" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="zimmet" Relationship="Self.FK_zimmet_tel_marka" FromRole="tel_marka" ToRole="zimmet" />
+        </EntityType>
+        <EntityType Name="zimmet">
+          <Key>
+            <PropertyRef Name="zimmet_id" />
+          </Key>
+          <Property Name="cihaz_id" Type="Int32" Nullable="false" />
+          <Property Name="kullanici_id" Type="Int32" Nullable="false" />
+          <Property Name="zimmet_tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="zimmet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="telmarka_id" Type="Int32" />
+          <NavigationProperty Name="cihaz" Relationship="Self.FK_zimmet_cihaz" FromRole="zimmet" ToRole="cihaz" />
+          <NavigationProperty Name="kullanici" Relationship="Self.FK_zimmet_kullanici" FromRole="zimmet" ToRole="kullanici" />
+          <NavigationProperty Name="tel_marka" Relationship="Self.FK_zimmet_tel_marka" FromRole="zimmet" ToRole="tel_marka" />
+        </EntityType>
+        <Association Name="FK_cihaz_marka_kategori">
+          <End Role="marka_kategori" Type="Self.marka_kategori" Multiplicity="0..1" />
+          <End Role="cihaz" Type="Self.cihaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marka_kategori">
+              <PropertyRef Name="marka_id" />
+            </Principal>
+            <Dependent Role="cihaz">
+              <PropertyRef Name="marka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zimmet_cihaz">
+          <End Role="cihaz" Type="Self.cihaz" Multiplicity="1" />
+          <End Role="zimmet" Type="Self.zimmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cihaz">
+              <PropertyRef Name="cihaz_id" />
+            </Principal>
+            <Dependent Role="zimmet">
+              <PropertyRef Name="cihaz_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zimmet_kullanici">
+          <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+          <End Role="zimmet" Type="Self.zimmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kullanici">
+              <PropertyRef Name="kullanici_id" />
+            </Principal>
+            <Dependent Role="zimmet">
+              <PropertyRef Name="kullanici_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_zimmet_tel_marka">
+          <End Role="tel_marka" Type="Self.tel_marka" Multiplicity="0..1" />
+          <End Role="zimmet" Type="Self.zimmet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tel_marka">
+              <PropertyRef Name="telmarka_id" />
+            </Principal>
+            <Dependent Role="zimmet">
+              <PropertyRef Name="telmarka_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SirketZT" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin" EntityType="Self.admin" />
+          <EntitySet Name="cihaz" EntityType="Self.cihaz" />
+          <EntitySet Name="kullanici" EntityType="Self.kullanici" />
+          <EntitySet Name="marka_kategori" EntityType="Self.marka_kategori" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tel_marka" EntityType="Self.tel_marka" />
+          <EntitySet Name="zimmet" EntityType="Self.zimmet" />
+          <AssociationSet Name="FK_cihaz_marka_kategori" Association="Self.FK_cihaz_marka_kategori">
+            <End Role="marka_kategori" EntitySet="marka_kategori" />
+            <End Role="cihaz" EntitySet="cihaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zimmet_cihaz" Association="Self.FK_zimmet_cihaz">
+            <End Role="cihaz" EntitySet="cihaz" />
+            <End Role="zimmet" EntitySet="zimmet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zimmet_kullanici" Association="Self.FK_zimmet_kullanici">
+            <End Role="kullanici" EntitySet="kullanici" />
+            <End Role="zimmet" EntitySet="zimmet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_zimmet_tel_marka" Association="Self.FK_zimmet_tel_marka">
+            <End Role="tel_marka" EntitySet="tel_marka" />
+            <End Role="zimmet" EntitySet="zimmet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sirketModelStoreContainer" CdmEntityContainer="SirketZT">
+          <EntitySetMapping Name="admin">
+            <EntityTypeMapping TypeName="sirketModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="admin_ad" ColumnName="admin_ad" />
+                <ScalarProperty Name="admin_sifre" ColumnName="admin_sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cihaz">
+            <EntityTypeMapping TypeName="sirketModel.cihaz">
+              <MappingFragment StoreEntitySet="cihaz">
+                <ScalarProperty Name="cihaz_id" ColumnName="cihaz_id" />
+                <ScalarProperty Name="cihaz_ad" ColumnName="cihaz_ad" />
+                <ScalarProperty Name="cihaz_tür" ColumnName="cihaz_tür" />
+                <ScalarProperty Name="cihaz_konum" ColumnName="cihaz_konum" />
+                <ScalarProperty Name="cihaz_durum" ColumnName="cihaz_durum" />
+                <ScalarProperty Name="cihaz_zimmet_tarih" ColumnName="cihaz_zimmet_tarih" />
+                <ScalarProperty Name="marka_id" ColumnName="marka_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kullanici">
+            <EntityTypeMapping TypeName="sirketModel.kullanici">
+              <MappingFragment StoreEntitySet="kullanici">
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+                <ScalarProperty Name="kullanici_sifre" ColumnName="kullanici_sifre" />
+                <ScalarProperty Name="kullanici_departman" ColumnName="kullanici_departman" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marka_kategori">
+            <EntityTypeMapping TypeName="sirketModel.marka_kategori">
+              <MappingFragment StoreEntitySet="marka_kategori">
+                <ScalarProperty Name="marka_ad" ColumnName="marka_ad" />
+                <ScalarProperty Name="marka_id" ColumnName="marka_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="sirketModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tel_marka">
+            <EntityTypeMapping TypeName="sirketModel.tel_marka">
+              <MappingFragment StoreEntitySet="tel_marka">
+                <ScalarProperty Name="telmarka_id" ColumnName="telmarka_id" />
+                <ScalarProperty Name="telmarka_adi" ColumnName="telmarka_adi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zimmet">
+            <EntityTypeMapping TypeName="sirketModel.zimmet">
+              <MappingFragment StoreEntitySet="zimmet">
+                <ScalarProperty Name="cihaz_id" ColumnName="cihaz_id" />
+                <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+                <ScalarProperty Name="zimmet_tarih" ColumnName="zimmet_tarih" />
+                <ScalarProperty Name="zimmet_id" ColumnName="zimmet_id" />
+                <ScalarProperty Name="telmarka_id" ColumnName="telmarka_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "AdminEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Admin Ekle</h2>
+<form action="/admin/AdminEkle/" class="form-group" method="post">
+
+
+    <div>
+
+        <label>Admin Ad</label>
+        <input type="text" class="form-control" name="admin_ad" required="" />
+    </div>
+
+    <div>
+        <label>Admin Sifre</label>
+        <input type="text" class="form-control"name="admin_sifre" required=""/>
+    </div>
+   
+
+    <br />
+   
+        <button class="btn btn-info">Admin Ekle</button>
+    
+</form>
